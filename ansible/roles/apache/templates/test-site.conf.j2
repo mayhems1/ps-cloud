@@ -1,0 +1,9 @@
+<Directory "/opt/html">
+    AllowOverride None
+    Require all granted
+</Directory>
+<VirtualHost {{ ansible_default_ipv4.address }}:80>
+    DocumentRoot "/opt/html"
+    ErrorLog /var/log/httpd/test-error.log
+    CustomLog /var/log/httpd/test-requests.log combined
+</VirtualHost>

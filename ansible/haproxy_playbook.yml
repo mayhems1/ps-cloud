@@ -1,0 +1,8 @@
+# Playbook to install and configure HAProxy
+---
+- name: Install HAproxy
+  hosts: haproxy
+  remote_user: centos
+  become: true
+  roles:
+    - haproxy

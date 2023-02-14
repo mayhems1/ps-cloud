@@ -1,0 +1,14 @@
+---
+- name: Main.yml | Install HAproxy package
+  ansible.builtin.yum:
+    name: haproxy
+    state: present
+
+- name: Main.yml | Add  test config for HAproxy
+  ansible.builtin.template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart haproxy

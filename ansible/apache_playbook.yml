@@ -1,0 +1,8 @@
+# Playbook to install and configure Apache
+---
+- name: Install Apache Web Server
+  hosts: apache
+  remote_user: centos
+  become: true
+  roles:
+    - apache

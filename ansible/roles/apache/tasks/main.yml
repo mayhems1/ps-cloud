@@ -1,0 +1,46 @@
+---
+- name: Main.yml | Install httpd package
+  ansible.builtin.yum:
+    name: httpd
+    state: present
+
+- name: Main.yml | Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /opt/html
+    state: directory
+    mode: 0755
+    setype: httpd_sys_content_t
+
+- name: Main.yml | Add a test HTML page
+  ansible.builtin.template:
+    src: index.html.j2
+    dest: /opt/html/index.html
+    owner: apache
+    group: apache
+    mode: 0644
+    setype: httpd_sys_content_t
+  notify: restart httpd
+
+- name: Main.yml | Add a test config
+  ansible.builtin.template:
+    src: test-site.conf.j2
+    dest: /etc/httpd/conf.d/test.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart httpd
+
+- name: Main.yml | Remove Welcome page
+  ansible.builtin.file:
+    path: /etc/httpd/conf.d/welcome.conf
+    state: absent
+  notify: restart httpd
+
+# - name: Main.yml | Allow apache to modify files in /srv/git_repos
+#   community.general.sefcontext:
+#     target: '/opt/html(/.*)?'
+#     setype: httpd_sys_content_t
+#     state: present
+
+# - name: Main.yml | Apply new SELinux file context to filesystem
+#   ansible.builtin.command: restorecon -irv /opt/html
