@@ -47,7 +47,7 @@ cd ps-test/terraform
 ```
 
 ```conf
-# OpenStack private vars
+# OpenStack private vars - file ps.tfvars
 openstack_user_name = ""
 openstack_tenant_name = ""
 openstack_password = ""
