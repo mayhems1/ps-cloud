@@ -35,12 +35,3 @@
     path: /etc/httpd/conf.d/welcome.conf
     state: absent
   notify: restart httpd
-
-# - name: Main.yml | Allow apache to modify files in /srv/git_repos
-#   community.general.sefcontext:
-#     target: '/opt/html(/.*)?'
-#     setype: httpd_sys_content_t
-#     state: present
-
-# - name: Main.yml | Apply new SELinux file context to filesystem
-#   ansible.builtin.command: restorecon -irv /opt/html
