@@ -63,7 +63,9 @@ openstack_haproxy_instance_count = 1
 openstack_haproxy_instance_instance_name = "haproxy-test-vm"
 openstack_ansible_role_url = "https://ansible-test.archive.pscloud.io/ansible.tar.gz" # URL с ansible в S3
 openstack_instance_password = "" # password of a instance
+```
 
+```bash
 # Проверяем что все корреткно
 terraform plan --var-file="ps.tfvars"
 
